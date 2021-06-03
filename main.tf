@@ -5,11 +5,12 @@
 # Terraform Block
 
 terraform {
-    required_providers  {
-        azurerm =   {
-            source  =   "hashicorp/azurerm"
-        }
-    }
+    backend azurerm {
+    resource_group_name = "tfrmRG"
+    storage_account_name = "tfrm"
+    container_name = "tfrm-container"
+	sas_token = "?sv=2020-02-10&ss=bfqt&srt=co&sp=rwdlacuptfx&se=2021-06-03T13:57:31Z&st=2021-06-03T05:57:31Z&spr=https&sig=18Rn0t8p3G0tH2%2BZ%2F1tX2WfvTYYLn07lLECIijYYR2c%3D" 
+  }
 }
 
 # Provider Block
@@ -36,32 +37,7 @@ provider "azuread" {
 }
 
 
-// module "windows-server" {
-//     source  =   "./azure/WindowsServer2019"
-// }
-
-// module "winvm" {
-//     source =    "./azure/Windows10-ExistingInfra"
-// }
-
-
-
-// module "aks" {
-//     source    =     "./azure/aks"
-//     env       =     "dev"
-// }
-
-
-
-// module "customrole" {
-//     source  =   "./azure/custom-roles"
-// }
-
-// module "provisioners" {
-//     source  =   "./azure/provisioners-example"
-// }
-
-// module "linuxvm" {
-//     source  =   "./azure/linuxVM"
-// }
+module "virtualnetwork" {
+    source  =   "./azure/virtualnetwork"
+}
 
